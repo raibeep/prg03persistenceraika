@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.prg03projetoindividualraika;
+package br.com.ifba;
 
 /**
  *
  * @author raiii
  */
-public class Prg03projetoindividualraika {
+public class CursoSave {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
