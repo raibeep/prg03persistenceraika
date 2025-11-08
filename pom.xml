@@ -46,6 +46,11 @@
             <artifactId>jboss-logging</artifactId>
             <version>3.5.3.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE270</version>
+        </dependency>
     </dependencies>
 
 </project>
