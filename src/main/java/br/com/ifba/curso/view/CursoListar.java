@@ -62,13 +62,13 @@ public class CursoListar extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtPesquisar.setText("Pesquise aqui...");
-        jPanel1.add(txtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 111, -1));
+        jPanel1.add(txtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 260, -1));
 
-        bntPesquisar.setText("Pesquisar");
-        jPanel1.add(bntPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+        bntPesquisar.setIcon(new javax.swing.ImageIcon("C:\\Users\\raiii\\OneDrive\\Documentos\\NetBeansProjects\\prg03projetoindividualraika\\src\\main\\java\\br\\com\\ifba\\image\\lupa (1).png")); // NOI18N
+        jPanel1.add(bntPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 30, 30));
 
-        bntAdicionar.setText("Adicionar");
-        jPanel1.add(bntAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+        bntAdicionar.setIcon(new javax.swing.ImageIcon("C:\\Users\\raiii\\OneDrive\\Documentos\\NetBeansProjects\\prg03projetoindividualraika\\src\\main\\java\\br\\com\\ifba\\image\\adicao (1).png")); // NOI18N
+        jPanel1.add(bntAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, 30));
 
         tblCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
