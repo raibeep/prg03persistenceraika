@@ -160,6 +160,45 @@ public class CursoListar extends javax.swing.JFrame {
     tblCursos.setRowHeight(30);
     tblCursos.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
     tblCursos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+    // --- AÇÃO DE CLIQUE NOS "BOTÕES" DA TABELA ---
+tblCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+    @Override
+    public void mouseClicked(java.awt.event.MouseEvent e) {
+        int row = tblCursos.rowAtPoint(e.getPoint());
+        int column = tblCursos.columnAtPoint(e.getPoint());
+
+        // Botão Editar (coluna 4)
+        if (column == 4) {
+            String codigo = tblCursos.getValueAt(row, 0).toString();
+            CursoDAO dao = new CursoDAO();
+            Curso curso = dao.buscarCodigo(null, codigo); // use o método que você já tem
+            if (curso != null) {
+                CursoEditar tela = new CursoEditar(curso);
+                tela.setVisible(true);
+            }
+        }
+
+        // Botão Remover (coluna 5)
+        if (column == 5) {
+            String codigo = tblCursos.getValueAt(row, 0).toString();
+            int opc = javax.swing.JOptionPane.showConfirmDialog(
+                    null,
+                    "Deseja realmente excluir o curso " + codigo + "?",
+                    "Confirmação",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+            if (opc == javax.swing.JOptionPane.YES_OPTION) {
+                CursoDAO dao = new CursoDAO();
+                Curso curso = dao.buscarCodigo(null, codigo);
+                if (curso != null) {
+                    dao.removerCurso(curso);
+                    javax.swing.JOptionPane.showMessageDialog(null, "Curso removido com sucesso!");
+                    configurarTabela(); // Atualiza a tabela após remover
+                }
+            }
+        }
+    }
+});
     }
 
     private void corrigirScroll() {
