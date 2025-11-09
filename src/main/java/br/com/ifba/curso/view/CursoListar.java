@@ -84,14 +84,14 @@ public class CursoListar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCursos);
         tblCursos.getAccessibleContext().setAccessibleParent(scrollTabela);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 47, 354, 258));
-        jPanel1.add(scrollTabela, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 20, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 47, 470, 258));
+        jPanel1.add(scrollTabela, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 20, 230));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

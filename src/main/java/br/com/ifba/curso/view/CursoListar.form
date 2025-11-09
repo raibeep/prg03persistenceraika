@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" pref="413" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" pref="545" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -79,7 +79,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="19" y="47" width="354" height="258"/>
+              <AbsoluteConstraints x="19" y="47" width="470" height="258"/>
             </Constraint>
           </Constraints>
 
@@ -107,7 +107,7 @@
         <Container class="javax.swing.JScrollPane" name="scrollTabela">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="380" y="70" width="20" height="230"/>
+              <AbsoluteConstraints x="500" y="70" width="20" height="230"/>
             </Constraint>
           </Constraints>
 

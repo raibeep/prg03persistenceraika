@@ -22,6 +22,13 @@ public class Curso {
     private String nome;
     private String codigoCurso;
     private boolean ativo;
+    
+    public Curso(String nome, String codigoCurso) {
+        this.nome = nome;
+        this.codigoCurso = codigoCurso;
+        this.ativo = true; // define automaticamente como ativo
+    }
+
 
     public long getId() {
         return id;
