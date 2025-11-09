@@ -67,18 +67,17 @@ public class CursoDAO {
         return cursos;//retorna a lista
     }
     
-    public Curso buscarCodigo(String nome, String codigo){
+    public Curso buscarCodigo(String nome, String codigo) {
         EntityManager em = JPAUtil.getEntityManager();
-        try{
-            TypedQuery<Curso> query = em.createQuery(
-                    "SELECT c FROM Curso WHERE c.nome = :nome AND c.cogigoCurso = :codigo", Curso.class);
-            query.setParameter("nome", nome);
-            query.setParameter("codigo", codigo);
-            return query.getSingleResult();
-        }catch(NoResultException e){
-            return null;
-        }finally{
-            em.close();
+        try {
+            return em.createQuery(
+                    "SELECT c FROM Curso c WHERE c.codigoCurso = :codigo", Curso.class)
+                    .setParameter("codigo", codigo)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Retorna null se não encontrar
+        } finally {
+            em.close(); // Fecha a sessão corretamente
         }
     }
 }
