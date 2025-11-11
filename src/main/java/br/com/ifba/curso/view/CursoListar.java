@@ -30,6 +30,8 @@ public class CursoListar extends javax.swing.JFrame {
     /**
      * Creates new form CursoListar
      */
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter;
+
     public CursoListar() {
         initComponents();
         configurarTabela();
@@ -113,25 +115,25 @@ public class CursoListar extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_bntAdicionarActionPerformed
     private void configurarTabela() {
-        // 1) Cria o modelo com as colunas e dados de exemplo
-    String[] colunas = {"Código", "Nome", "Carga Horária", "Ativo", "Editar", "Remover"};
-    javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(colunas, 0) {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return column >= 4; // só as duas últimas colunas são editáveis
-        }
+            // 1) Cria o modelo com as colunas e dados de exemplo
+        String[] colunas = {"Código", "Nome", "Carga Horária", "Ativo", "Editar", "Remover"};
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(colunas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column >= 4; // só as duas últimas colunas são editáveis
+            }
 
-        @Override
-        public Class<?> getColumnClass(int columnIndex) {
-            if (columnIndex == 3) return Boolean.class; // coluna "Ativo"
-            return String.class;
-        }
-    };
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 3) return Boolean.class; // coluna "Ativo"
+                return String.class;
+            }
+        };
     
-    CursoDAO dao = new CursoDAO();
-    List<Curso> lista = dao.buscarTodos();
+        CursoDAO dao = new CursoDAO();
+        List<Curso> lista = dao.buscarTodos();
     
-     for (Curso c : lista) {
+        for (Curso c : lista) {
             modelo.addRow(new Object[]{
                 c.getCodigoCurso(),
                 c.getNome(), 
@@ -140,83 +142,117 @@ public class CursoListar extends javax.swing.JFrame {
                 "Editar",
                 "Remover",
             });
-     }
-
-    // 2) Atribui o modelo à tabela
-    tblCursos.setModel(modelo);
-
-    // 3) Impede redimensionamento automático — faça isso antes de definir larguras
-    tblCursos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-
-    // 4) Ajusta largura das colunas (agora que o modelo está definido)
-    tblCursos.getColumnModel().getColumn(0).setPreferredWidth(60);  // Código
-    tblCursos.getColumnModel().getColumn(1).setPreferredWidth(220); // Nome
-    tblCursos.getColumnModel().getColumn(2).setPreferredWidth(100); // Carga Horária
-    tblCursos.getColumnModel().getColumn(3).setPreferredWidth(60);  // Ativo
-    tblCursos.getColumnModel().getColumn(4).setPreferredWidth(70);  // Editar
-    tblCursos.getColumnModel().getColumn(5).setPreferredWidth(80);  // Remover
-
-    // 5) Aparência
-    tblCursos.setRowHeight(30);
-    tblCursos.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
-    tblCursos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
-    // --- AÇÃO DE CLIQUE NOS "BOTÕES" DA TABELA ---
-tblCursos.addMouseListener(new java.awt.event.MouseAdapter() {
-    @Override
-    public void mouseClicked(java.awt.event.MouseEvent e) {
-        int row = tblCursos.rowAtPoint(e.getPoint());
-        int column = tblCursos.columnAtPoint(e.getPoint());
-
-        // Botão Editar (coluna 4)
-        if (column == 4) {
-            String codigo = tblCursos.getValueAt(row, 0).toString();
-            CursoDAO dao = new CursoDAO();
-            Curso curso = dao.buscarCodigo(null, codigo); // use o método que você já tem
-            if (curso != null) {
-                CursoEditar tela = new CursoEditar(curso);
-                tela.setVisible(true);
-            }
         }
 
-        // Botão Remover (coluna 5)
-        if (column == 5) {
-            String codigo = tblCursos.getValueAt(row, 0).toString();
-            int opc = javax.swing.JOptionPane.showConfirmDialog(
-                    null,
-                    "Deseja realmente excluir o curso " + codigo + "?",
-                    "Confirmação",
-                    javax.swing.JOptionPane.YES_NO_OPTION
-            );
-            if (opc == javax.swing.JOptionPane.YES_OPTION) {
-                CursoDAO dao = new CursoDAO();
-                Curso curso = dao.buscarCodigo(null, codigo);
-                if (curso != null) {
-                    dao.removerCurso(curso);
-                    javax.swing.JOptionPane.showMessageDialog(null, "Curso removido com sucesso!");
-                    configurarTabela(); // Atualiza a tabela após remover
+        // 2) Atribui o modelo à tabela
+        tblCursos.setModel(modelo);
+
+        // 3) Impede redimensionamento automático — faça isso antes de definir larguras
+        tblCursos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+
+        // 4) Ajusta largura das colunas (agora que o modelo está definido)
+        tblCursos.getColumnModel().getColumn(0).setPreferredWidth(60);  // Código
+        tblCursos.getColumnModel().getColumn(1).setPreferredWidth(220); // Nome
+        tblCursos.getColumnModel().getColumn(2).setPreferredWidth(100); // Carga Horária
+        tblCursos.getColumnModel().getColumn(3).setPreferredWidth(60);  // Ativo
+        tblCursos.getColumnModel().getColumn(4).setPreferredWidth(70);  // Editar
+        tblCursos.getColumnModel().getColumn(5).setPreferredWidth(80);  // Remover
+
+        // 5) Aparência
+        tblCursos.setRowHeight(30);
+        tblCursos.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+        tblCursos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+   
+        // --- AÇÃO DE CLIQUE NOS "BOTÕES" DA TABELA ---
+        tblCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                int row = tblCursos.rowAtPoint(e.getPoint());
+                int column = tblCursos.columnAtPoint(e.getPoint());
+
+                // Botão Editar (coluna 4)
+                if (column == 4) {
+                    String codigo = tblCursos.getValueAt(row, 0).toString();
+                    CursoDAO dao = new CursoDAO();
+                    Curso curso = dao.buscarCodigo(null, codigo); // use o método que você já tem
+                    if (curso != null) {
+                        CursoEditar tela = new CursoEditar(curso);
+                        tela.setVisible(true);
+                    }
+                }
+
+                // Botão Remover (coluna 5)
+                if (column == 5) {
+                    String codigo = tblCursos.getValueAt(row, 0).toString();
+                    int opc = javax.swing.JOptionPane.showConfirmDialog(
+                        null,
+                        "Deseja realmente excluir o curso " + codigo + "?",
+                        "Confirmação",
+                        javax.swing.JOptionPane.YES_NO_OPTION
+                    );
+                    if (opc == javax.swing.JOptionPane.YES_OPTION) {
+                        CursoDAO dao = new CursoDAO();
+                        Curso curso = dao.buscarCodigo(null, codigo);
+                        if (curso != null) {
+                            dao.removerCurso(curso);
+                            javax.swing.JOptionPane.showMessageDialog(null, "Curso removido com sucesso!");
+                            configurarTabela(); // Atualiza a tabela após remover
+                        }
+                    }
                 }
             }
+        });
+        // --- CONFIGURAÇÃO DO FILTRO DINÂMICO ---
+        sorter = new javax.swing.table.TableRowSorter<>((javax.swing.table.DefaultTableModel) tblCursos.getModel());
+        tblCursos.setRowSorter(sorter);
+
+        // Agora adiciona o filtro que reage ao que for digitado no campo de pesquisa
+        txtPesquisar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                filtrarTabela();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                filtrarTabela();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                filtrarTabela();
+            }
+        });
+
+    }
+    private void filtrarTabela() {
+        String texto = txtPesquisar.getText().trim();
+
+        if (texto.isEmpty()) {
+            sorter.setRowFilter(null); // mostra tudo
+        } else {
+            sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + texto, 1));
+            // (1) é o índice da coluna "Nome"
         }
     }
-});
-    }
+
 
     private void corrigirScroll() {
-    // Remove o scroll vazio, se ainda existir
-    if (scrollTabela != null) {
-        jPanel1.remove(scrollTabela);
+        // Remove o scroll vazio, se ainda existir
+        if (scrollTabela != null) {
+            jPanel1.remove(scrollTabela);
+        }
+
+        // Garante que a tabela está dentro do scroll principal
+        jScrollPane1.setViewportView(tblCursos);
+
+        // Ajusta tamanho e política de rolagem
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        // Redimensiona a área do scroll corretamente
+        jScrollPane1.setBounds(20, 50, 600, 250);
     }
-
-    // Garante que a tabela está dentro do scroll principal
-    jScrollPane1.setViewportView(tblCursos);
-
-    // Ajusta tamanho e política de rolagem
-    jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    jScrollPane1.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-    // Redimensiona a área do scroll corretamente
-    jScrollPane1.setBounds(20, 50, 600, 250);
-}
 
     /**
      * @param args the command line arguments

@@ -15,6 +15,7 @@ import java.util.List;
  *
  * @author raiii
  */
+//fiz o dao na atividade 12 pq o senhor permitiu, foi uma solução temporária
 //o DAO é feito para armazenar a lógica e fazer essa conexão entre as classes
 //é aqui onde eu vou criar os métodos salvar, editar, excluir e etc.
 public class CursoDAO {
