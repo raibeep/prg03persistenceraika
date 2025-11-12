@@ -19,8 +19,11 @@ import java.util.List;
 public class GenericDao <Entity extends PersistenceEntity>
                         implements GenericIDao<Entity>{
     
+    // O EntityManager é o principal objeto do JPA, ele gerencia as operações com o banco.
     protected static EntityManager entityManager;
     
+    // Bloco estático executado uma vez quando a classe é carregada
+    // Cria a "fábrica" de EntityManagers e inicializa a conexão com o banco
     static {
         EntityManagerFactory factory = 
                 Persistence.createEntityManagerFactory("gerenciamento_curso");
@@ -66,6 +69,8 @@ public class GenericDao <Entity extends PersistenceEntity>
     }
     
     protected Class<?> getTypeClass(){
+        // Esse método usa reflexão para descobrir qual é a classe real da entidade genérica
+        // Exemplo: se for CursoDAO, retorna a classe Curso
         Class<?> clazz = (Class<?>) ((ParameterizedType) 
                 this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]; 
         return clazz;

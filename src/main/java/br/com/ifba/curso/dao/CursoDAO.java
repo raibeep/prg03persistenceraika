@@ -24,6 +24,7 @@ public class CursoDAO extends GenericDao<Curso>
         EntityManager em = getEntityManager();
         Curso curso = null;
         try {
+            // Cria a consulta JPQL para buscar pelo campo codigoCurso
             Query query = em.createQuery("SELECT c FROM Curso c WHERE c.codigoCurso = :codigo");
             query.setParameter("codigo", codigo);
             curso = (Curso) query.getSingleResult();
