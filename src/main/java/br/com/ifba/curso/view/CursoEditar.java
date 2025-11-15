@@ -20,18 +20,19 @@ public class CursoEditar extends javax.swing.JFrame {
     /**
      * Creates new form CursoEditar
      */
-    private Curso curso;
-    
-    public CursoEditar(){
-        initComponents();
-    }
-    public CursoEditar(Curso curso) {
-        initComponents();
+    private final CursoIController cursoIController = new CursoController();
+    private final Curso curso;
+    private final CursoListar telaListar;
+    public CursoEditar(Curso curso, CursoListar telaListar){
+        this.telaListar = telaListar;
         this.curso = curso;
+
+        initComponents();
         
         txtNovoNome.setText(curso.getNome());
         txtNovoCodigo.setText(curso.getCodigoCurso());
-        txtNovaCarga.setText(curso.getCargaHoraria());
+        txtNovaCarga.setText(String.valueOf(curso.getCargaHoraria()));
+
     }
 
 
@@ -52,7 +53,7 @@ public class CursoEditar extends javax.swing.JFrame {
         txtNovaCarga = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Novo nome: ");
 
@@ -121,19 +122,20 @@ public class CursoEditar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private final CursoIController cursoIController = new CursoController();
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        curso.setNome(txtNovoNome.getText());
+        curso.setCodigoCurso(txtNovoCodigo.getText());
+        curso.setCargaHoraria(txtNovaCarga.getText());
         try{
-            curso.setNome(txtNovoNome.getText());
-            curso.setCodigoCurso(txtNovoCodigo.getText());
-            curso.setCargaHoraria(txtNovaCarga.getText());
-            
             cursoIController.update(curso);
+            JOptionPane.showMessageDialog(this, "Dados atualizados com sucesso!");
             
-            JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!");
-            dispose();
+            telaListar.atualizarTabela();
+            this.dispose();
+            
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "ERRO ao atualizar dados!");
+            JOptionPane.showMessageDialog(this, "ERRO ao atualizar dados!" + e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -159,7 +161,6 @@ public class CursoEditar extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CursoEditar().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author raiii
  */
+
 public class CursoSalvar extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CursoSalvar.class.getName());
@@ -19,9 +20,12 @@ public class CursoSalvar extends javax.swing.JFrame {
     /**
      * Creates new form CursoSalvar
      */
-    public CursoSalvar() {
+    private final CursoIController cursoIController = new CursoController();
+    private final CursoListar telaListar;
+    public CursoSalvar(CursoListar telaListar) {
+        this.telaListar = telaListar;
         initComponents();
-        
+
         setTitle("Salvar Curso");
     }
 
@@ -42,7 +46,7 @@ public class CursoSalvar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtCargaHoraria = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nome do Curso: ");
@@ -74,7 +78,7 @@ public class CursoSalvar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private final CursoIController cursoIController = new CursoController();
+
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         try{
             String nome = txtNome.getText().trim();//esse trim serve para ver se o usuário não digitou só espaço 
@@ -96,6 +100,9 @@ public class CursoSalvar extends javax.swing.JFrame {
             Curso curso = new Curso(nome, codigo, cargaHoraria);
         
             cursoIController.save(curso);
+            
+            telaListar.atualizarTabela();
+            this.dispose();
             
             JOptionPane.showMessageDialog(null, "Curso salvo com sucesso!!",
                     "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
@@ -129,7 +136,6 @@ public class CursoSalvar extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CursoSalvar().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
