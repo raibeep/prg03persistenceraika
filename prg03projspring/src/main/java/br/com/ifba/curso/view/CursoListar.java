@@ -209,7 +209,7 @@ public class CursoListar extends javax.swing.JFrame {
                 // Botão Editar (coluna 4)
                 if (column == 4) {
                     String codigo = (String) modelo.getValueAt(modelRow, 0);
-                    Curso curso = cursoIController.findByCodigo(codigo);
+                    Curso curso = cursoIController.findByCodigoCurso(codigo);
                     if (curso != null) {
                         // passa a referência desta janela para edição poder atualizar a lista
                         CursoEditar tela = new CursoEditar(curso, CursoListar.this, cursoIController);
@@ -227,7 +227,7 @@ public class CursoListar extends javax.swing.JFrame {
                         javax.swing.JOptionPane.YES_NO_OPTION
                     );
                     if (opc == javax.swing.JOptionPane.YES_OPTION) {
-                        Curso curso = cursoIController.findByCodigo(codigo);
+                        Curso curso = cursoIController.findByCodigoCurso(codigo);
                         if (curso != null) {
                             cursoIController.delete(curso);
                             javax.swing.JOptionPane.showMessageDialog(null, "Curso removido com sucesso!");

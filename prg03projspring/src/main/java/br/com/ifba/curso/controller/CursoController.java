@@ -45,7 +45,7 @@ public class CursoController implements CursoIController{
     }
     
     @Override
-    public Curso findByCodigo(String codigo) throws RuntimeException{
-        return cursoIService.findByCodigo(codigo);
+    public Curso findByCodigoCurso(String codigo) throws RuntimeException{
+        return cursoIService.findByCodigoCurso(codigo);
     }
 }

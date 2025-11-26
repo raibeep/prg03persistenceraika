@@ -17,5 +17,5 @@ public interface CursoIService {
     public Curso update(Curso curso) throws RuntimeException;
     public List<Curso> findAll() throws RuntimeException;
     public Curso findById(Long id) throws RuntimeException;
-    public Curso findByCodigo(String codigo) throws RuntimeException;
+    public Curso findByCodigoCurso(String codigo) throws RuntimeException;
 }

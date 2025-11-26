@@ -4,8 +4,8 @@
  */
 package br.com.ifba.curso.service;
 
-import br.com.ifba.curso.dao.CursoIDao;
 import br.com.ifba.curso.entity.Curso;
+import br.com.ifba.curso.repository.CursoRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,8 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class CursoService implements CursoIService{
     @Autowired
-    private CursoIDao cursoIDao;
+    private CursoRepository cursoRepository;
+
     
     @Override
     public Curso save(Curso curso) throws RuntimeException{
@@ -28,7 +29,7 @@ public class CursoService implements CursoIService{
         }else if(curso.getId() != null){
             throw new RuntimeException("Curso " + "já existente no banco de dados.");
         }else{
-            return cursoIDao.save(curso);
+            return cursoRepository.save(curso);
         }
     }
     
@@ -39,7 +40,7 @@ public class CursoService implements CursoIService{
         }else if(curso.getId() == null){
             throw new RuntimeException("Curso não existente no banco de dados");
         }else{
-            cursoIDao.delete(curso);
+            cursoRepository.delete(curso);
         }
     }
     
@@ -48,23 +49,23 @@ public class CursoService implements CursoIService{
         if(curso == null){
             throw new RuntimeException("Dados do " + "curso não preenchidos.");
         }else{
-            return cursoIDao.update(curso);
+            return cursoRepository.save(curso);
         }
     }
     
     @Override
     public List<Curso> findAll() throws RuntimeException{
-       return cursoIDao.findAll();
+       return cursoRepository.findAll();
     }
     
     @Override
     public Curso findById(Long id) throws RuntimeException{
-        return cursoIDao.findById(id);
+        return cursoRepository.findById(id).orElse(null);
     }
     
     @Override
-    public Curso findByCodigo(String codigo) throws RuntimeException{
-        return cursoIDao.findByCodigo(codigo);
+    public Curso findByCodigoCurso(String codigo) throws RuntimeException{
+        return cursoRepository.findByCodigoCurso(codigo);
     }
 }
 
