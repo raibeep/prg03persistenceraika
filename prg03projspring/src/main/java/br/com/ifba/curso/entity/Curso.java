@@ -17,8 +17,11 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
+//utilizado para criar métodos repetitivos (getters, setters...)
 @NoArgsConstructor
+//cria um construtor vazio
 @AllArgsConstructor
+//cria um construtor que recebe todos atributos da classe
 public class Curso extends PersistenceEntity
                     implements Serializable{
     

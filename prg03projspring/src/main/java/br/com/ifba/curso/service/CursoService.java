@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
+//é a maneira do Spring garantir que as operações de dados sejam seguras e consistentes.
 @RequiredArgsConstructor
+//cria construtor para os atributos final
 public class CursoService implements CursoIService{
     
     private final CursoRepository cursoRepository;

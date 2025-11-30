@@ -7,6 +7,7 @@ package br.com.ifba.curso.controller;
 import br.com.ifba.curso.entity.Curso;
 import br.com.ifba.curso.service.CursoIService;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -15,9 +16,11 @@ import org.springframework.stereotype.Controller;
  * @author raiii
  */
 @Controller
+@RequiredArgsConstructor
+//anotação que cria construtor para atributos final
 public class CursoController implements CursoIController{
-    @Autowired
-    private CursoIService cursoIService;
+
+    private final CursoIService cursoIService;
     
     @Override
     public List<Curso> findAll() throws RuntimeException{

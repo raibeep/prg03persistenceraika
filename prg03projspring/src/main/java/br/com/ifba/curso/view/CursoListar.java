@@ -14,6 +14,7 @@ import javax.swing.UIManager;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
  *
  * @author raiii
  */
+@RequiredArgsConstructor
 @Component
 public class CursoListar extends javax.swing.JFrame {
     
@@ -32,13 +34,8 @@ public class CursoListar extends javax.swing.JFrame {
     private TableRowSorter<DefaultTableModel> sorter;
     
     private DefaultTableModel modelo;
-    private CursoIController cursoIController; 
-    @Autowired
-    public CursoListar(CursoIController cursoIController) {
-        this.cursoIController = cursoIController;
-        
-    }
-    
+    private final CursoIController cursoIController; 
+
     @PostConstruct
     public void init() {
         initComponents();
