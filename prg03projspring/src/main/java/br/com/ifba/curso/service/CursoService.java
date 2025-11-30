@@ -8,7 +8,9 @@ import br.com.ifba.curso.entity.Curso;
 import br.com.ifba.curso.repository.CursoRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,10 +19,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CursoService implements CursoIService{
-    @Autowired
-    private CursoRepository cursoRepository;
+    
+    private final CursoRepository cursoRepository;
 
+    private static final Logger log = LoggerFactory.getLogger(CursoService.class);
     
     @Override
     public Curso save(Curso curso) throws RuntimeException{
@@ -29,6 +33,7 @@ public class CursoService implements CursoIService{
         }else if(curso.getId() != null){
             throw new RuntimeException("Curso " + "já existente no banco de dados.");
         }else{
+            log.info("Salvando o objeto curso.");
             return cursoRepository.save(curso);
         }
     }
@@ -40,6 +45,7 @@ public class CursoService implements CursoIService{
         }else if(curso.getId() == null){
             throw new RuntimeException("Curso não existente no banco de dados");
         }else{
+            log.info("Deletando o objeto curso.");
             cursoRepository.delete(curso);
         }
     }
@@ -49,22 +55,26 @@ public class CursoService implements CursoIService{
         if(curso == null){
             throw new RuntimeException("Dados do " + "curso não preenchidos.");
         }else{
+            log.info("Atualizando o objeto curso.");
             return cursoRepository.save(curso);
         }
     }
     
     @Override
     public List<Curso> findAll() throws RuntimeException{
+        log.info("Listando os objetos curso.");
        return cursoRepository.findAll();
     }
     
     @Override
     public Curso findById(Long id) throws RuntimeException{
+        log.info("Buscando por ID o objeto curso.");
         return cursoRepository.findById(id).orElse(null);
     }
     
     @Override
     public Curso findByCodigoCurso(String codigo) throws RuntimeException{
+        log.info("Buscando por código o objeto curso.");
         return cursoRepository.findByCodigoCurso(codigo);
     }
 }
